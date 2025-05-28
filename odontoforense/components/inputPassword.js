@@ -16,6 +16,7 @@ const PasswordInput = ({ value, onChangeText, label = 'Senha', style, ...props }
       onChangeText={onChangeText}
       secureTextEntry={!showPassword}
       style={[styles.input, style]}
+      placeholder='Digite sua senha...'
       right={
         <TextInput.Icon
           icon={showPassword ? 'eye-off' : 'eye'}

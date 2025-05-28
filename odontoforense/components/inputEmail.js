@@ -15,6 +15,7 @@ const EmailInput = ({ value, onChangeText, label = 'Email', style, ...props }) =
         autoCapitalize="none"
         autoComplete="email"
         textContentType="emailAddress"
+        placeholder='Digite seu email...'
         style={[styles.input, style]}
         {...props}
       />
@@ -24,6 +25,7 @@ const EmailInput = ({ value, onChangeText, label = 'Email', style, ...props }) =
   // ESTILO DE INPUT DE EMAILS
   const styles = StyleSheet.create({
     input: {
+      width: 267,
       marginVertical: 8,
     },
   });
