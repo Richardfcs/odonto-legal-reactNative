@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// TELA [IMCOMPLETA]
+import { ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+// DEFINIR FUNÇÃO
+export default function HomeScreen() {
+  const [casos, setCasos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+  const API_URL = 'https://odonto-legal-backend.onrender.com';
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 10,
   },
 });

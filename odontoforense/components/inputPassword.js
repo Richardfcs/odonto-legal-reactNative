@@ -16,6 +16,7 @@ const PasswordInput = ({ value, onChangeText, label = 'Senha', style, ...props }
       onChangeText={onChangeText}
       secureTextEntry={!showPassword}
       style={[styles.input, style]}
+      placeholder='Digite sua senha...'
       right={
         <TextInput.Icon
           icon={showPassword ? 'eye-off' : 'eye'}
@@ -30,6 +31,7 @@ const PasswordInput = ({ value, onChangeText, label = 'Senha', style, ...props }
 // ESTILO DE SENHAS
 const styles = StyleSheet.create({
   input: {
+    width: 267,
     marginVertical: 8,
   },
 });

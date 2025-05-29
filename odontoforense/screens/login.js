@@ -1,27 +1,35 @@
-import * as React from 'react';
+// TELA PRONTA
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Alert, ActivityIndicator } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-paper';
 
+
+{/* IMPORT DE INPUTS DE SENHA E EMAIL VINDOS DE "components/input..." (CAUÃ) */}
+import EmailInput from '../components/inputEmail';
+import PasswordInput from '../components/inputPassword';
+
+
+// TELA DE LOGIN - FUNÇÕES
 export default function LoginScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState(''); {/* INPUT DE EMAIL (CAUÃ) */}
+  const [password, setPassword] = useState(""); {/* INPUT DE SENHA (CAUÃ) */}
+  const [loading, setLoading] = useState(false); {/* BOTÃO DE CONFIRMAR LOGIN + LOADING (CAUÃ) */}
   const navigation = useNavigation();
   const API_URL = 'https://odonto-legal-backend.onrender.com';
 
+
+// ERRO
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
       Alert.alert('Erro', 'Por favor, preencha ambos os campos');
       return;
     }
-
-    setLoading(true);
     
+// VERIFICAÇÃO DE CARGO
+    setLoading(true);
     try {
       const response = await fetch(`${API_URL}/api/user/login`, {
         method: 'POST',
@@ -50,11 +58,11 @@ export default function LoginScreen() {
             break;
           case 'perito':
           case 'assistente':
-            navigation.navigate('MainHome');
+            navigation.navigate('Home');
             break;
           default:
             Alert.alert('Aviso', 'Perfil não reconhecido, redirecionando...');
-            navigation.navigate('DefaultHome');
+            navigation.navigate('Home');
         }
       } else {
         if (response.status === 401 || response.status === 403) {
@@ -73,64 +81,50 @@ export default function LoginScreen() {
     }
   };
 
+
+// FRONTEND (BOTÕES E VIEWS DA TELA)
   return (
-    <View style={styles.container}>
-      <TextInput
-        mode="outlined"
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-
-      <TextInput
-        label="Senha"
-        mode="outlined"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={!showPassword}
-        style={styles.input}
-        right={
-          <TextInput.Icon
-            icon={showPassword ? 'eye-off' : 'eye'}
-            onPress={() => setShowPassword(!showPassword)}
-          />
-        }
-      />
-
+<View style={styles.container}>
+    <View style={styles.content}>
+      <EmailInput value={email} onChangeText={setEmail} /> {/* INPUT DE EMAIL (CAUÃ) */}
+      <PasswordInput value={password} onChangeText={setPassword} /> {/* INPUT DE SENHA (CAUÃ) */}
       <Button
         mode="contained"
         onPress={handleLogin}
         disabled={loading}
         style={styles.button}
+        buttonColor="#2563eb"
         labelStyle={styles.buttonLabel}>
-        {loading ? (
-          <ActivityIndicator color="#fff" />
-        ) : (
-          'Entrar'
-        )}
+        {loading ? (<ActivityIndicator color="#fff" />) : ('Entrar')} {/* BOTÃO DE CONFIRMAR O LOGIN (CAUÃ) */}
       </Button>
-
-      <StatusBar style="auto" />
     </View>
+  <StatusBar style="auto" />
+</View>
   );
 }
 
+
+// ESTILOS DA TELA DE LOGIN (CAUÃ)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
-    padding: 20,
+    justifyContent: 'center', // Centraliza verticalmente
+    alignItems: 'center',     // Centraliza horizontalmente
+  },
+  content: {
+    width: '100%',
+    paddingHorizontal: 20,
+    alignItems: 'center',
   },
   input: {
     marginBottom: 15,
   },
   button: {
     marginTop: 10,
+    width: 267,
     paddingVertical: 5,
+    borderRadius: 5,
   },
   buttonLabel: {
     fontSize: 16,
