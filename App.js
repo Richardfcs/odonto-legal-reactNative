@@ -1,9 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './screens/login'
 
-// import AdminHomeScreen from './screensAdm/home'
-import MainHomeScreen from './screens/home'
+// Telas
+import LoginScreen from './screens/login';
+import MainHomeScreen from './screens/home';
+import CaseDetailsScreen from './screens/detalhes-do-caso'; // ✅ import da tela de detalhes
 
 const Stack = createStackNavigator();
 
@@ -11,10 +12,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        
-        {/* <Stack.Screen name="AdminHome" component={AdminHomeScreen} /> */}
-        <Stack.Screen name="MainHome" component={MainHomeScreen} />
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+          options={{ headerShown: false }} // Oculta o cabeçalho da tela de login
+        />
+        <Stack.Screen 
+          name="MainHome" 
+          component={MainHomeScreen} 
+          options={{ title: 'Início' }} // Nome visível no cabeçalho
+        />
+        <Stack.Screen 
+          name="CaseDetails" 
+          component={CaseDetailsScreen} 
+          options={{ title: 'Detalhes do Caso' }} // ✅ nova rota adicionada
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
