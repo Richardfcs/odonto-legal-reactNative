@@ -46,7 +46,7 @@ export default function LoginScreen() {
         
         switch(result.role) {
           case 'admin':
-            navigation.navigate('AdminHome');
+            navigation.navigate('AdminTabs');
             break;
           case 'perito':
           case 'assistente':
