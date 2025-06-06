@@ -3,13 +3,47 @@ import { ScrollView, View, StyleSheet, useWindowDimensions } from 'react-native'
 import { Card, Title, TextInput, Button, List, Divider, Text, ActivityIndicator } from 'react-native-paper';
 import { BarChart } from 'react-native-chart-kit';
 import ChartCard from './ChartCard';
+import SelectMenu from '../SelectMenu'; // Importa o nosso componente reutilizável
 
 const API_BASE_URL_IA = "https://backend-graficos.onrender.com/api";
 
+// ===== OPÇÕES PARA OS SELETORES =====
+const genderOptions = [
+    { label: 'Masculino', value: 'masculino' },
+    { label: 'Feminino', value: 'feminino' },
+    { label: 'Intersexo', value: 'intersexo' },
+    { label: 'Indeterminado', value: 'indeterminado' },
+    { label: 'Desconhecido', value: 'desconhecido' },
+];
+
+const ethnicityOptions = [
+    { label: 'Branca', value: 'branca' },
+    { label: 'Parda', value: 'parda' },
+    { label: 'Preta', value: 'preta' },
+    { label: 'Amarela', value: 'amarela' },
+    { label: 'Indígena', value: 'indigena' },
+    { label: 'Não Declarada', value: 'nao_declarada' },
+    { label: 'Desconhecida', value: 'desconhecida' },
+];
+
+const causeOfDeathOptions = [
+    { label: 'Ferimento por Arma de Fogo', value: 'ferimento_arma_fogo' },
+    { label: 'Ferimento por Arma Branca', value: 'ferimento_arma_branca' },
+    { label: 'Asfixia', value: 'asfixia' },
+    { label: 'Trauma Contuso', value: 'trauma_contuso' },
+    { label: 'Intoxicação', value: 'intoxicacao' },
+    { label: 'Queimadura', value: 'queimadura' },
+    { label: 'Afogamento', value: 'afogamento' },
+    { label: 'Causa Natural', value: 'causa_natural_especifica' },
+    { label: 'Indeterminada Medicamente', value: 'indeterminada_medicamente' },
+    { label: 'Outra', value: 'outra' },// Adicione mais opções se necessário
+];
+// =====================================
+
+
 const IADashboard = () => {
     const { width: screenWidth } = useWindowDimensions();
-    
-    // ... (todos os outros 'useState' continuam os mesmos) ...
+
     const [loadingFeatures, setLoadingFeatures] = useState(true);
     const [featuresData, setFeaturesData] = useState(null);
     const [formState, setFormState] = useState({
@@ -19,18 +53,17 @@ const IADashboard = () => {
     const [loadingPrediction, setLoadingPrediction] = useState(false);
     const [predictionResult, setPredictionResult] = useState(null);
 
-    // ... (a lógica de fetch, handleInput e handlePredict continua a mesma) ...
     const fetchFeatureImportance = useCallback(async () => {
         setLoadingFeatures(true);
         try {
             const res = await fetch(`${API_BASE_URL_IA}/modelo/info`);
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Erro ao buscar importâncias');
-            
+
             const importances = data.features_importances;
             const topN = 15;
             const entries = Object.entries(importances).sort(([, a], [, b]) => b - a);
-            
+
             setFeaturesData({
                 labels: entries.slice(0, topN).map(([key]) => key.length > 12 ? key.substring(0, 12) + '...' : key),
                 datasets: [{ data: entries.slice(0, topN).map(([, value]) => value) }]
@@ -76,42 +109,40 @@ const IADashboard = () => {
         }
     };
 
-    // ** LÓGICA DO AJUSTE **
-    // Configurações para fazer o gráfico caber na tela
     const chartConfig = {
         backgroundGradientFrom: '#ffffff',
         backgroundGradientTo: '#ffffff',
         color: (opacity = 1) => `rgba(0, 123, 255, ${opacity})`,
-        barPercentage: 0.4, // Tornamos as barras mais finas para caberem mais
+        barPercentage: 0.4,
         decimalPlaces: 3,
         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        propsForLabels: {
-            fontSize: 9, // Diminuímos o tamanho da fonte dos rótulos
-        },
+        propsForLabels: { fontSize: 9 },
     };
-    
+
+    // Lista de campos do formulário para renderização dinâmica
     const formFields = [
-        { name: 'Gênero', keyboard: 'default' },
-        { name: 'Etnia/Raça', keyboard: 'default' },
-        { name: 'Causa Primária Morte', keyboard: 'default' },
-        { name: 'Idade Registrada', keyboard: 'numeric' },
-        { name: 'Estatura (cm)', keyboard: 'numeric' },
-        { name: 'Latitude', keyboard: 'numeric' },
-        { name: 'Longitude', keyboard: 'numeric' },
-        { name: 'Idade Estimada (Min)', keyboard: 'numeric' },
-        { name: 'Idade Estimada (Max)', keyboard: 'numeric' },
+        // Campos que agora são Seletores
+        { name: 'Gênero', type: 'select', options: genderOptions },
+        { name: 'Etnia/Raça', type: 'select', options: ethnicityOptions },
+        { name: 'Causa Primária Morte', type: 'select', options: causeOfDeathOptions },
+        // Campos que continuam como TextInput
+        { name: 'Idade Registrada', type: 'input', keyboard: 'numeric' },
+        { name: 'Estatura (cm)', type: 'input', keyboard: 'numeric' },
+        { name: 'Latitude', type: 'input', keyboard: 'numeric' },
+        { name: 'Longitude', type: 'input', keyboard: 'numeric' },
+        { name: 'Idade Estimada (Min)', type: 'input', keyboard: 'numeric' },
+        { name: 'Idade Estimada (Max)', type: 'input', keyboard: 'numeric' },
     ];
 
     return (
         <ScrollView>
             <ChartCard title="Importância das Features (Top 11)" isLoading={loadingFeatures}>
                 {featuresData && (
-                    // ** O AJUSTE ESTÁ AQUI: SEM SCROLLVIEW **
                     <BarChart
                         data={featuresData}
-                        width={screenWidth + 35} // Força a largura do gráfico a ser a da tela (menos padding)
+                        width={screenWidth - 16} // Ajuste para o padding do ChartCard
                         height={400}
-                        chartConfig={chartConfig} // Usa a nova configuração com barras finas e fontes pequenas
+                        chartConfig={chartConfig}
                         verticalLabelRotation={90}
                         fromZero={true}
                         yAxisLabel=""
@@ -124,18 +155,35 @@ const IADashboard = () => {
             <Card style={styles.card}>
                 <Card.Content>
                     <Title>Predizer Status de Identificação</Title>
-                    {formFields.map(field => (
-                        <TextInput
-                            key={field.name}
-                            label={field.name}
-                            value={formState[field.name]}
-                            onChangeText={(text) => handleInputChange(field.name, text)}
-                            style={styles.input}
-                            mode="outlined"
-                            dense
-                            keyboardType={field.keyboard}
-                        />
-                    ))}
+
+                    {/* Renderização dinâmica do formulário */}
+                    {formFields.map(field => {
+                        if (field.type === 'select') {
+                            return (
+                                <SelectMenu
+                                    key={field.name}
+                                    label={field.name}
+                                    value={formState[field.name]}
+                                    options={field.options}
+                                    onSelect={(value) => handleInputChange(field.name, value)}
+                                    placeholder={`Selecione ${field.name}...`}
+                                />
+                            );
+                        }
+                        return (
+                            <TextInput
+                                key={field.name}
+                                label={field.name}
+                                value={String(formState[field.name])} // Converte para string para evitar erro com números
+                                onChangeText={(text) => handleInputChange(field.name, text)}
+                                style={styles.input}
+                                mode="outlined"
+                                dense
+                                keyboardType={field.keyboard}
+                            />
+                        );
+                    })}
+
                     <Button
                         mode="contained"
                         onPress={handlePredict}
@@ -147,22 +195,22 @@ const IADashboard = () => {
                     </Button>
 
                     {predictionResult && (
-                       <View style={styles.resultContainer}>
-                           <Divider style={styles.divider} />
-                           <Title style={styles.resultTitle}>Resultado da Predição</Title>
-                           {predictionResult.error ? (
-                               <Text style={styles.errorText}>{predictionResult.error}</Text>
-                           ) : (
-                               <>
-                                   <List.Item title="Status Predito" description={predictionResult.status_identificacao_predito} left={props => <List.Icon {...props} icon="brain" />} />
-                                   <Divider />
-                                   <List.Subheader>Probabilidades</List.Subheader>
-                                   {Object.entries(predictionResult.probabilidades).map(([key, value]) => (
-                                       <List.Item key={key} title={key} description={`${(value * 100).toFixed(2)}%`} left={props => <List.Icon {...props} icon="chart-pie" />} />
-                                   ))}
-                               </>
-                           )}
-                       </View>
+                        <View style={styles.resultContainer}>
+                            <Divider style={styles.divider} />
+                            <Title style={styles.resultTitle}>Resultado da Predição</Title>
+                            {predictionResult.error ? (
+                                <Text style={styles.errorText}>{predictionResult.error}</Text>
+                            ) : (
+                                <>
+                                    <List.Item title="Status Predito" description={predictionResult.status_identificacao_predito} left={props => <List.Icon {...props} icon="brain" />} />
+                                    <Divider />
+                                    <List.Subheader>Probabilidades</List.Subheader>
+                                    {Object.entries(predictionResult.probabilidades).map(([key, value]) => (
+                                        <List.Item key={key} title={key} description={`${(value * 100).toFixed(2)}%`} left={props => <List.Icon {...props} icon="chart-pie" />} />
+                                    ))}
+                                </>
+                            )}
+                        </View>
                     )}
                 </Card.Content>
             </Card>
@@ -172,7 +220,7 @@ const IADashboard = () => {
 
 const styles = StyleSheet.create({
     card: {
-        marginVertical: 80,
+        margin: 16,
     },
     input: {
         marginTop: 12,

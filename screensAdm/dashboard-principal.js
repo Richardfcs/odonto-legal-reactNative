@@ -3,7 +3,6 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SegmentedButtons } from 'react-native-paper';
 
-
 // Importe os componentes de dashboard
 import GeralDashboard from '../components/dashboard/GeralDashboard';
 import CasosDashboard from '../components/dashboard/CasosDashboard';
@@ -38,22 +37,22 @@ const DashboardScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.flex1} edges={['bottom', 'left', 'right']}>
-      <View style={styles.flex1}>
-        {/* Envolvemos os botões segmentados em um ScrollView horizontal */}
+    // SafeAreaView garante que nada fique atrás de notches ou da barra de status
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+        {/* Este View é o cabeçalho com os botões segmentados */}
         <View style={styles.headerContainer}>
             <ScrollView 
                 horizontal={true} 
-                showsHorizontalScrollIndicator={false} // Oculta a barra de scroll visual
-                contentContainerStyle={styles.scrollViewContent} // Estilo para o conteúdo do scroll
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.scrollViewContent}
             >
                 <SegmentedButtons
                     value={value}
                     onValueChange={setValue}
                     buttons={[
-                        { value: 'geral', label: 'Geral', },
-                        { value: 'casos', label: 'Casos', },
-                        { value: 'vitimas', label: 'Vítimas', },
+                        { value: 'geral', label: 'Geral' },
+                        { value: 'casos', label: 'Casos' },
+                        { value: 'vitimas', label: 'Vítimas' },
                         { value: 'usuarios', label: 'Usuários' },
                         { value: 'locais', label: 'Locais' },
                         { value: 'atividades', label: 'Atividades' },
@@ -64,40 +63,41 @@ const DashboardScreen = () => {
             </ScrollView>
         </View>
 
-        {/* O conteúdo do dashboard agora usa um ScrollView vertical separado */}
-        <ScrollView style={styles.dashboardContainer}>
-            <View style={styles.dashboardContent}>
-                {renderDashboard()}
-            </View>
+        {/* 
+          Este ScrollView agora ocupa o espaço restante. 
+          Não usamos flex: 1 nele, mas sim no seu conteúdo para garantir 
+          que ele se estique corretamente quando o conteúdo for pequeno.
+        */}
+        <ScrollView contentContainerStyle={styles.dashboardContent}>
+            {renderDashboard()}
         </ScrollView>
-      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  flex1: {
-    flex: 1,
-    backgroundColor: '#f4f7fa', // Cor de fundo para consistência
+  container: {
+    flex: 1, // O container principal ocupa toda a tela
+    backgroundColor: '#f4f7fa',
   },
   headerContainer: {
     paddingVertical: 8,
-    backgroundColor: '#fff', // Cor de fundo para o cabeçalho
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
   scrollViewContent: {
-    paddingHorizontal: 8, // Adiciona um padding nas laterais dentro do scroll
-    alignItems: 'center', // Alinha verticalmente os botões
+    paddingHorizontal: 8,
+    alignItems: 'center',
   },
   segmentedButtons: {
-    // A largura será definida pelo conteúdo, não precisa de estilo específico aqui
-  },
-  dashboardContainer: {
-    flex: 1,
+    // A largura será definida pelo seu conteúdo
   },
   dashboardContent: {
     padding: 8,
+    // Adicionamos um padding na parte inferior para garantir que o último 
+    // elemento não fique colado na barra de abas
+    paddingBottom: 24, 
   },
 });
 

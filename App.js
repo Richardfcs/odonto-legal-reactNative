@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'react-native'; // Usado para os placeholders restantes
+import { View, Text, useColorScheme } from 'react-native'; // Usado para os placeholders restantes
 import { Provider as PaperProvider } from 'react-native-paper';
 
 // --- Telas Principais e Navegadores ---
@@ -22,106 +22,101 @@ import EditarVitimaScreen from './screensAdm/editarVitima';
 import OdontogramaScreen from './screensAdm/odontograma';
 import EditarCasoScreen from './screensAdm/editarCaso';
 
-// --- Componentes Placeholder para rotas futuras ---
-const AdminCaseDetailsScreen = () => <View><Text>Tela de Detalhes do Caso (Admin)</Text></View>;
-const AdminCreateCaseScreen = () => <View><Text>Tela de Criação de Caso (Admin)</Text></View>;
-const AdminCreateFuncionarioScreen = () => <View><Text>Tela de Cadastrar Funcionário</Text></View>;
-
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-      <Stack.Navigator 
-        initialRouteName="Login"
-      >
-        {/* Telas que não têm o layout de abas */}
-        <Stack.Screen 
-          name="Login" 
-          component={LoginScreen} 
-          options={{ headerShown: false }}
-        />
-        
-        {/* Rota para o conjunto de telas do Admin (o Tab Navigator) */}
-        <Stack.Screen 
-          name="AdminTabs" 
-          component={AdminTabNavigator} 
-          options={{ headerShown: false }}
-        />
-        
-        {/* Rota para Peritos/Assistentes */}
-        <Stack.Screen name="MainHome" component={MainHomeScreen} />
+        <Stack.Navigator
+          initialRouteName="Login"
+        >
+          {/* Telas que não têm o layout de abas */}
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
 
-        {/* ================================================================== */}
-        {/* Telas que serão abertas POR CIMA do fluxo de abas do Admin        */}
-        {/* ================================================================== */}
-        
-        <Stack.Screen 
-          name="AdminProfile" 
-          component={ProfileScreen}
-          options={{ title: 'Meu Perfil' }}
-        />
-        
-        {/* ROTA ATUALIZADA */}
-        <Stack.Screen 
-          name="AdminManagePermissions" 
-          component={GerenciarPermissoesScreen} // Agora aponta para o componente real
-          options={{ title: 'Gerenciar Funcionário' }} // Título do header da tela
-        />
+          {/* Rota para o conjunto de telas do Admin (o Tab Navigator) */}
+          <Stack.Screen
+            name="AdminTabs"
+            component={AdminTabNavigator}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen 
-          name="AdminCreateFuncionario" 
-          component={CadastrarFuncionarioScreen}
-          options={{ title: 'Cadastrar Funcionário' }}
-        />
+          {/* Rota para Peritos/Assistentes */}
+          <Stack.Screen name="MainHome" component={MainHomeScreen} />
 
-        {/* Rotas de Casos (ainda como placeholder) */}
-        <Stack.Screen 
-          name="AdminCaseDetails" 
-          component={DetalhesCasoScreen}
-          options={{ title: 'Detalhes do Caso' }} // O título do header
-        />
+          {/* ================================================================== */}
+          {/* Telas que serão abertas POR CIMA do fluxo de abas do Admin        */}
+          {/* ================================================================== */}
 
-        <Stack.Screen 
-          name="AdminCreateCase" 
-          component={CriarCasoScreen}
-          options={{ title: 'Criar Novo Caso' }}
-        />
+          <Stack.Screen
+            name="AdminProfile"
+            component={ProfileScreen}
+            options={{ title: 'Meu Perfil' }}
+          />
 
-        <Stack.Screen 
-          name="AdminCreateVictim"
-          component={CadastrarVitimaScreen}
-          options={{ title: 'Adicionar Vítima ao Caso' }}
-        />
+          {/* ROTA ATUALIZADA */}
+          <Stack.Screen
+            name="AdminManagePermissions"
+            component={GerenciarPermissoesScreen} // Agora aponta para o componente real
+            options={{ title: 'Gerenciar Funcionário' }} // Título do header da tela
+          />
 
-        <Stack.Screen 
-          name="AdminVictimDetails"
-          component={DetalhesVitimaScreen} // Agora aponta para o componente real
-          options={{ title: 'Detalhes da Vítima' }}
-        />
+          <Stack.Screen
+            name="AdminCreateFuncionario"
+            component={CadastrarFuncionarioScreen}
+            options={{ title: 'Cadastrar Funcionário' }}
+          />
 
-        {/* ADICIONANDO A NOVA ROTA DE EDIÇÃO DE VÍTIMA */}
-        <Stack.Screen 
-          name="AdminEditVictim"
-          component={EditarVitimaScreen}
-          options={{ title: 'Editar Dados da Vítima' }}
-        />
+          {/* Rotas de Casos (ainda como placeholder) */}
+          <Stack.Screen
+            name="AdminCaseDetails"
+            component={DetalhesCasoScreen}
+            options={{ title: 'Detalhes do Caso' }} // O título do header
+          />
 
-        <Stack.Screen 
-          name="AdminOdontograma"
-          component={OdontogramaScreen}
-          options={{ title: 'Registro Odontológico' }}
-        />
+          <Stack.Screen
+            name="AdminCreateCase"
+            component={CriarCasoScreen}
+            options={{ title: 'Criar Novo Caso' }}
+          />
 
-        <Stack.Screen 
-          name="AdminEditCase"
-          component={EditarCasoScreen}
-          options={{ title: 'Editar Dados do Caso' }}
-        />
+          <Stack.Screen
+            name="AdminCreateVictim"
+            component={CadastrarVitimaScreen}
+            options={{ title: 'Adicionar Vítima ao Caso' }}
+          />
 
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="AdminVictimDetails"
+            component={DetalhesVitimaScreen} // Agora aponta para o componente real
+            options={{ title: 'Detalhes da Vítima' }}
+          />
+
+          {/* ADICIONANDO A NOVA ROTA DE EDIÇÃO DE VÍTIMA */}
+          <Stack.Screen
+            name="AdminEditVictim"
+            component={EditarVitimaScreen}
+            options={{ title: 'Editar Dados da Vítima' }}
+          />
+
+          <Stack.Screen
+            name="AdminOdontograma"
+            component={OdontogramaScreen}
+            options={{ title: 'Registro Odontológico' }}
+          />
+
+          <Stack.Screen
+            name="AdminEditCase"
+            component={EditarCasoScreen}
+            options={{ title: 'Editar Dados do Caso' }}
+          />
+
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
   );
 }

@@ -59,6 +59,9 @@ const GeralDashboard = () => {
     strokeWidth: 2,
     barPercentage: 0.5,
     useShadowColorFromDataset: false,
+    propsForLabels: {
+            fontSize: 9, // Diminuímos o tamanho da fonte dos rótulos
+        },
   };
 
   return (
@@ -78,6 +81,7 @@ const GeralDashboard = () => {
           width={width - 50} // Ajuste de largura
           height={280}
           chartConfig={chartConfig}
+          verticalLabelRotation={25}
           bezier
           style={styles.chart}
         />

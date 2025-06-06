@@ -55,7 +55,10 @@ const LocaisDashboard = () => {
     backgroundGradientFrom: '#ffffff',
     backgroundGradientTo: '#ffffff',
     color: (opacity = 1) => `rgba(16, 185, 129, ${opacity})`,
-    barPercentage: 0.8,
+    barPercentage: 0.3,
+    propsForLabels: {
+            fontSize: 9, // Diminuímos o tamanho da fonte dos rótulos
+        },
   };
 
   return (
@@ -67,7 +70,7 @@ const LocaisDashboard = () => {
           <BarChart
             data={chartData}
             width={width - 50}
-            height={280}
+            height={300}
             chartConfig={chartConfig}
             yAxisLabel=""
             yAxisSuffix=""

@@ -21,6 +21,8 @@ const DetalhesCasoScreen = ({ route, navigation }) => {
   const [isReportModalVisible, setIsReportModalVisible] = useState(false);
   const [exporting, setExporting] = useState(false);
 
+  const [evidences, setEvidences] = useState([]);
+
   const loadCaseData = useCallback(async () => {
     setLoading(true);
     const token = await AsyncStorage.getItem('token');
@@ -39,8 +41,19 @@ const DetalhesCasoScreen = ({ route, navigation }) => {
   }, [caseId]);
 
   useEffect(() => {
+    const loadData = async () => {
+            // ... (código para buscar o caseData)
+            
+            // Busca também as evidências
+            const evRes = await fetch(`${API_URL}/api/evidence/${caseId}`, { /* ... */ });
+            const evData = await evRes.json();
+            if (evRes.ok) {
+                setEvidences(evData.evidences || []);
+            }
+        };
+    loadData();
     loadCaseData();
-  }, [loadCaseData]);
+  }, [loadCaseData, caseId]);
 
   // Adiciona o menu de opções no header da tela
   useLayoutEffect(() => {

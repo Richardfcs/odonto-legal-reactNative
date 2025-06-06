@@ -1,35 +1,59 @@
 {
   "expo": {
-    "name": "odontoforense",
-    "slug": "odontoforense",
+    "name": "OdontoForense",
+    "slug": "OdontoForense",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "icon": "./assets/icon3.png",
+    "backgroundColor": "#808080",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/icon4.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+      "backgroundColor": "#808080"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon3.png"
     },
+    "ios": {
+      "supportsTablet": true,
+      "userInterfaceStyle": "automatic",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "O aplicativo OdontoForense precisa de acesso à sua localização para georreferenciar evidências.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "O aplicativo OdontoForense precisa de acesso à sua localização para georreferenciar evidências.",
+        "NSLocationAlwaysUsageDescription": "O aplicativo OdontoForense precisa de acesso à sua localização para georreferenciar evidências.",
+        "NSCameraUsageDescription": "O aplicativo OdontoForense precisa de acesso à sua câmera para fotografar evidências.",
+        "NSPhotoLibraryUsageDescription": "O aplicativo OdontoForense precisa de acesso à sua galeria para selecionar fotos de evidências."
+      }
+    },
+
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon4.png",
+        "backgroundColor": "#ffffff"
+      },
+      "userInterfaceStyle": "automatic",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+
     "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "O aplicativo OdontoForense precisa de acesso à sua localização para georreferenciar evidências."
+        }
+      ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "O aplicativo precisa de acesso à sua galeria para que você possa selecionar uma foto de perfil."
+          "photosPermission": "O aplicativo OdontoForense precisa de acesso à sua galeria para selecionar fotos de evidências.",
+          "cameraPermission": "O aplicativo OdontoForense precisa de acesso à sua câmera para fotografar evidências."
         }
       ]
     ]

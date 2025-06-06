@@ -4,8 +4,6 @@ import { Button, Menu, Text } from 'react-native-paper';
 
 const SelectMenu = ({ label, value, options, onSelect, placeholder = "Selecione..." }) => {
     const [visible, setVisible] = useState(false);
-
-    // Encontra o label da opção selecionada para exibir no botão
     const selectedLabel = options.find(opt => opt.value === value)?.label || placeholder;
 
     return (
@@ -18,7 +16,7 @@ const SelectMenu = ({ label, value, options, onSelect, placeholder = "Selecione.
                     <Button 
                         icon="chevron-down" 
                         contentStyle={styles.menuButtonContent} 
-                        labelStyle={styles.menuButtonLabel} 
+                        labelStyle={styles.menuButtonLabel} // Usando o novo estilo de label
                         mode="outlined" 
                         onPress={() => setVisible(true)}
                     >
@@ -29,10 +27,7 @@ const SelectMenu = ({ label, value, options, onSelect, placeholder = "Selecione.
                 {options.map(opt => (
                     <Menu.Item 
                         key={opt.value} 
-                        onPress={() => { 
-                            onSelect(opt.value); 
-                            setVisible(false); 
-                        }} 
+                        onPress={() => { onSelect(opt.value); setVisible(false); }} 
                         title={opt.label} 
                     />
                 ))}
@@ -53,15 +48,18 @@ const styles = StyleSheet.create({
     },
     menuButtonContent: { 
         justifyContent: 'flex-start',
-        paddingVertical: 8,
-        height: 50, // Altura consistente com TextInput outlined
+        paddingVertical: 4, // Reduz o padding vertical para dar mais espaço
+        height: 'auto', // Permite que a altura se ajuste ao conteúdo
+        minHeight: 50,
     },
     menuButtonLabel: { 
         textAlign: 'left', 
         color: '#000',
         fontWeight: 'normal',
-        flex: 1, // Garante que o texto ocupe o espaço disponível
+        flexShrink: 1, // Permite que o texto encolha
+        flexWrap: 'wrap', // Permite que o texto quebre em múltiplas linhas
+        fontSize: 14,     // Garante um tamanho de fonte consistente
     },
 });
 
-export default SelectMenu; // Exportação padrão
+export default SelectMenu;
