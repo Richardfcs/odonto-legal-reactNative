@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'react-native'; // Usado para os placeholders restantes
+import { Provider as PaperProvider } from 'react-native-paper';
 
 // --- Telas Principais e Navegadores ---
 import LoginScreen from './screens/login';
@@ -19,6 +20,7 @@ import CadastrarVitimaScreen from './screensAdm/cadastrarVitima';
 import DetalhesVitimaScreen from './screensAdm/detalhesVitima';
 import EditarVitimaScreen from './screensAdm/editarVitima';
 import OdontogramaScreen from './screensAdm/odontograma';
+import EditarCasoScreen from './screensAdm/editarCaso';
 
 // --- Componentes Placeholder para rotas futuras ---
 const AdminCaseDetailsScreen = () => <View><Text>Tela de Detalhes do Caso (Admin)</Text></View>;
@@ -29,7 +31,8 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
       <Stack.Navigator 
         initialRouteName="Login"
       >
@@ -111,7 +114,14 @@ export default function App() {
           options={{ title: 'Registro Odontológico' }}
         />
 
+        <Stack.Screen 
+          name="AdminEditCase"
+          component={EditarCasoScreen}
+          options={{ title: 'Editar Dados do Caso' }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
+    </PaperProvider>
   );
 }
