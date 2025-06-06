@@ -91,7 +91,7 @@ const AdminHomeScreen = () => {
   const renderContent = () => {
     //... (a função renderContent continua exatamente igual)
     if (loading) { return <ActivityIndicator size="large" style={styles.loader} />; }
-    const dataWithAddCard = [...cases, { _id: 'add_new_case_placeholder' }];
+    const dataWithAddCard = [{ _id: 'add_new_case_placeholder' }, ...cases];
     return (
       <FlatList
         data={dataWithAddCard}

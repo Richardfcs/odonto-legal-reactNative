@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SegmentedButtons } from 'react-native-paper';
 
+
 // Importe os componentes de dashboard
 import GeralDashboard from '../components/dashboard/GeralDashboard';
 import CasosDashboard from '../components/dashboard/CasosDashboard';

@@ -3,6 +3,7 @@ import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { Menu, Button, Provider as PaperProvider } from 'react-native-paper';
 import { PieChart, BarChart, LineChart } from 'react-native-chart-kit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { handleExport } from './utils/dashboardUtils';
 
 import StatCard from './StatCard';
 import ChartCard from './ChartCard';
@@ -34,9 +35,18 @@ const VitimasDashboard = () => {
 
     const [activeView, setActiveView] = useState(victimGroupByOptions[0]);
     const [timeFilter, setTimeFilter] = useState(timeFilterOptions[0]);
-    
+
     const [viewMenuVisible, setViewMenuVisible] = useState(false);
     const [timeMenuVisible, setTimeMenuVisible] = useState(false);
+
+    const [exporting, setExporting] = useState(false);
+
+    const onExport = async () => {
+        setExporting(true);
+        // Os filtros para vítimas são mais complexos, mas por enquanto usamos o período
+        await handleExport('victims', { period: timeFilter.value, groupBy: activeView.type });
+        setExporting(false);
+    };
 
     const fetchVictimData = useCallback(async () => {
         setLoading(true);
@@ -58,7 +68,7 @@ const VitimasDashboard = () => {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
-            
+
             if (!res.ok) throw new Error(data.message || 'Erro ao buscar dados de vítimas');
 
             // O endpoint de timeline retorna um array diretamente, os outros um objeto { stats, total }
@@ -132,7 +142,7 @@ const VitimasDashboard = () => {
         <PaperProvider>
             <View>
                 <StatCard label="Total de Vítimas (no período)" value={loading ? '...' : stats.total} />
-                
+
                 <View style={styles.filtersContainer}>
                     <Menu
                         visible={viewMenuVisible}
@@ -165,6 +175,17 @@ const VitimasDashboard = () => {
                 <ChartCard title={`Distribuição por ${activeView.label}`} isLoading={loading}>
                     {renderChart()}
                 </ChartCard>
+
+                <Button
+                    icon="download"
+                    mode="contained"
+                    onPress={onExport}
+                    loading={exporting}
+                    disabled={exporting}
+                    style={{ margin: 16 }}
+                >
+                    Exportar Relatório de Vítimas (CSV)
+                </Button>
             </View>
         </PaperProvider>
     );

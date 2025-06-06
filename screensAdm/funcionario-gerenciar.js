@@ -64,7 +64,7 @@ const GerenciarFuncionariosScreen = () => {
       return <ActivityIndicator size="large" style={styles.loader} />;
     }
     
-    const dataWithAddCard = [...funcionarios, { _id: 'add_new_placeholder' }];
+    const dataWithAddCard = [{ _id: 'add_new_placeholder' }, ...funcionarios];
 
     return (
       <FlatList

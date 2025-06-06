@@ -3,6 +3,7 @@ import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { SegmentedButtons, Menu, Button, Provider as PaperProvider } from 'react-native-paper';
 import { PieChart, BarChart } from 'react-native-chart-kit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { handleExport } from './utils/dashboardUtils';
 
 import StatCard from './StatCard';
 import ChartCard from './ChartCard';
@@ -19,11 +20,20 @@ const CasosDashboard = () => {
   const [timeFilter, setTimeFilter] = useState({ value: 'all', label: 'Todo Período' });
   const [menuVisible, setMenuVisible] = useState(false);
 
+  const [exporting, setExporting] = useState(false);
+
+  const onExport = async () => {
+    setExporting(true);
+    // Passa os filtros atuais da aba para a função de exportação
+    await handleExport('cases', { period: timeFilter.value });
+    setExporting(false);
+  };
+
   const fetchCaseData = useCallback(async () => {
     setLoading(true);
     setChartData(null); // Limpa dados antigos antes de nova busca
     const token = await AsyncStorage.getItem('token');
-    
+
     const params = new URLSearchParams({
       type: viewType,
     });
@@ -73,12 +83,12 @@ const CasosDashboard = () => {
     { label: 'Últ. Mês', value: 'last-month' },
     { label: 'Últ. Ano', value: 'last-year' },
   ];
-  
+
   const handleSelectFilter = (option) => {
     setTimeFilter(option);
     setMenuVisible(false);
   };
-  
+
   const chartConfig = {
     backgroundGradientFrom: '#ffffff',
     backgroundGradientTo: '#ffffff',
@@ -90,7 +100,7 @@ const CasosDashboard = () => {
     <PaperProvider>
       <View>
         <StatCard label="Total de Casos (no período)" value={loading ? '...' : totalCases} />
-        
+
         <View style={styles.filtersContainer}>
           <SegmentedButtons
             value={viewType}
@@ -130,22 +140,33 @@ const CasosDashboard = () => {
             />
           )}
           {chartData && viewType === 'category' && (
-             <BarChart
-                data={{
-                  labels: chartData.map(item => item.name),
-                  datasets: [{ data: chartData.map(item => item.count) }]
-                }}
-                width={width - 60}
-                height={280}
-                chartConfig={chartConfig}
-                yAxisLabel=""
-                yAxisSuffix=""
-                verticalLabelRotation={25}
-                fromZero={true}
-                style={styles.chartStyle}
-              />
+            <BarChart
+              data={{
+                labels: chartData.map(item => item.name),
+                datasets: [{ data: chartData.map(item => item.count) }]
+              }}
+              width={width - 60}
+              height={280}
+              chartConfig={chartConfig}
+              yAxisLabel=""
+              yAxisSuffix=""
+              verticalLabelRotation={25}
+              fromZero={true}
+              style={styles.chartStyle}
+            />
           )}
         </ChartCard>
+
+        <Button
+          icon="download"
+          mode="contained"
+          onPress={onExport}
+          loading={exporting}
+          disabled={exporting}
+          style={{ margin: 16 }}
+        >
+          Exportar Relatório de Casos (CSV)
+        </Button>
       </View>
     </PaperProvider>
   );

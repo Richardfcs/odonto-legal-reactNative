@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, useWindowDimensions } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button } from 'react-native-paper';
+import { handleExport } from './utils/dashboardUtils';
 
 import StatCard from './StatCard';
 import ChartCard from './ChartCard';
@@ -14,11 +16,20 @@ const UsuariosDashboard = () => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [chartData, setChartData] = useState(null);
 
+  const [exporting, setExporting] = useState(false);
+
+  const onExport = async () => {
+    setExporting(true);
+    // Sem filtros por enquanto, mas a estrutura está pronta
+    await handleExport('users', {});
+    setExporting(false);
+  };
+
   const fetchUserData = useCallback(async () => {
     setLoading(true);
     setChartData(null);
     const token = await AsyncStorage.getItem('token');
-    
+
     try {
       const res = await fetch(`${API_BASE}/users-stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -73,6 +84,16 @@ const UsuariosDashboard = () => {
           />
         )}
       </ChartCard>
+      <Button
+        icon="download"
+        mode="contained"
+        onPress={onExport}
+        loading={exporting}
+        disabled={exporting}
+        style={{ margin: 16 }}
+      >
+        Exportar Relatório de Usuários (CSV)
+      </Button>
     </View>
   );
 };
