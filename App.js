@@ -6,7 +6,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 
 // --- Telas Principais e Navegadores ---
 import LoginScreen from './screens/login';
-import MainHomeScreen from './screens/home'; // Tela para Perito/Assistente
+import UserTabNavigator from './navigators/UserTabNavigator';
 import AdminTabNavigator from './navigators/AdminTabNavigator'; // Navegador de abas do Admin
 
 // --- Telas do Administrador (acessadas de dentro do fluxo do Admin) ---
@@ -21,6 +21,18 @@ import DetalhesVitimaScreen from './screensAdm/detalhesVitima';
 import EditarVitimaScreen from './screensAdm/editarVitima';
 import OdontogramaScreen from './screensAdm/odontograma';
 import EditarCasoScreen from './screensAdm/editarCaso';
+
+import DetalhesCasoUserScreen from './screens/DetalhesCasoUserScreen';
+import DetalhesVitimaUserScreen from './screens/DetalhesVitimaUserScreen';
+import EditarVitimaUserScreen from './screens/EditarVitimaUserScreen';
+import OdontogramaUserScreen from './screens/OdontogramaUserScreen';
+import CriarCasoUserScreen from './screens/CriarCasoUserScreen';
+import EditarCasoUserScreen from './screens/EditarCasoUserScreen';
+import CadastrarVitimaUserScreen from './screens/CadastrarVitimaUserScreen';
+
+import DetalhesCasoConsultaScreen from './screens/consulta/DetalhesCasoConsultaScreen';
+import ConsultaVictimDetailsScreen from './screens/consulta/ConsultaVictimDetailsScreen';
+import ConsultaOdontogramaScreen from './screens/consulta/ConsultaOdontograma';
 
 const Stack = createStackNavigator();
 
@@ -44,9 +56,6 @@ export default function App() {
             component={AdminTabNavigator}
             options={{ headerShown: false }}
           />
-
-          {/* Rota para Peritos/Assistentes */}
-          <Stack.Screen name="MainHome" component={MainHomeScreen} />
 
           {/* ================================================================== */}
           {/* Telas que serão abertas POR CIMA do fluxo de abas do Admin        */}
@@ -113,6 +122,72 @@ export default function App() {
             name="AdminEditCase"
             component={EditarCasoScreen}
             options={{ title: 'Editar Dados do Caso' }}
+          />
+
+          <Stack.Screen
+            name="UserTabs"
+            component={UserTabNavigator}
+            options={{ headerShown: false }} // O navegador de abas tem seu próprio header
+          />
+
+          <Stack.Screen
+            name="UserCreateCase"
+            component={CriarCasoUserScreen} // Aponta para o componente real
+            options={{ title: 'Criar Novo Caso' }}
+          />
+
+          <Stack.Screen
+            name="UserCaseDetails"
+            component={DetalhesCasoUserScreen} // Aponta para o componente real
+            options={{ title: 'Detalhes do Caso' }}
+          />
+
+          <Stack.Screen
+            name="UserVictimDetails"
+            component={DetalhesVitimaUserScreen}
+            options={{ title: 'Detalhes da Vítima' }}
+          />
+
+          <Stack.Screen
+            name="UserEditVictim"
+            component={EditarVitimaUserScreen} // Aponta para o componente real
+            options={{ title: 'Editar Dados da Vítima' }}
+          />
+
+          <Stack.Screen
+            name="UserOdontograma"
+            component={OdontogramaUserScreen}
+            options={{ title: 'Registro Odontológico' }}
+          />
+
+          <Stack.Screen
+            name="UserEditCase"
+            component={EditarCasoUserScreen}
+            options={{ title: 'Editar Caso' }}
+          />
+
+          <Stack.Screen
+            name="UserCreateVictim"
+            component={CadastrarVitimaUserScreen}
+            options={{ title: 'Adicionar Vítima ao Caso' }}
+          />
+
+          <Stack.Screen
+            name="ConsultaCaseDetails"
+            component={DetalhesCasoConsultaScreen}
+            options={{ title: 'Consulta de Caso' }}
+          />
+
+          <Stack.Screen
+            name="ConsultaVictimDetails"
+            component={ConsultaVictimDetailsScreen}
+            options={{ title: 'Consulta de Vítima' }}
+          />
+
+          <Stack.Screen
+            name="ConsultaOdontograma"
+            component={ConsultaOdontogramaScreen}
+            options={{ title: 'Consulta de Odontograma' }}
           />
 
         </Stack.Navigator>

@@ -46,11 +46,11 @@ export default function LoginScreen() {
         
         switch(result.role) {
           case 'admin':
-            navigation.navigate('AdminTabs');
+            navigation.replace('AdminTabs');
             break;
           case 'perito':
           case 'assistente':
-            navigation.navigate('MainHome');
+             navigation.replace('UserTabs'); 
             break;
           default:
             Alert.alert('Aviso', 'Perfil não reconhecido, redirecionando...');
