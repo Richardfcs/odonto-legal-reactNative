@@ -92,11 +92,11 @@ Após iniciar, escaneie o QR code com o aplicativo **Expo Go** no seu celular ou
 
 ## 👥 Contribuidores
 
-*   Richard
-*   Morgana
-*   Eduardo
-*   Hadassa
-*   Cauã
+*   [Richard](https://github.com/Richardfcs)
+*   [Morgana](https://github.com/MorganaSouza)
+*   [Eduardo](https://github.com/luardo05)
+*   [Hadassa](https://github.com/Hadassa-gomes)
+*   [Cauã](https://github.com/Cauartsz)
 
 ## 📌 Observações
 
