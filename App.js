@@ -123,73 +123,83 @@ export default function App() {
             component={EditarCasoScreen}
             options={{ title: 'Editar Dados do Caso' }}
           />
+          <Stack.Group screenOptions={{
+            headerStyle: {
+              backgroundColor: '#0f172a', // Cor escura
+            },
+            headerTintColor: '#fff', // Cor do texto e ícone de voltar
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}>
 
-          <Stack.Screen
-            name="UserTabs"
-            component={UserTabNavigator}
-            options={{ headerShown: false }} // O navegador de abas tem seu próprio header
-          />
+            <Stack.Screen
+              name="UserTabs"
+              component={UserTabNavigator}
+              options={{ headerShown: false }} // O navegador de abas tem seu próprio header
+            />
 
-          <Stack.Screen
-            name="UserCreateCase"
-            component={CriarCasoUserScreen} // Aponta para o componente real
-            options={{ title: 'Criar Novo Caso' }}
-          />
+            <Stack.Screen
+              name="UserCreateCase"
+              component={CriarCasoUserScreen} // Aponta para o componente real
+              options={{ title: 'Criar Novo Caso' }}
+            />
 
-          <Stack.Screen
-            name="UserCaseDetails"
-            component={DetalhesCasoUserScreen} // Aponta para o componente real
-            options={{ title: 'Detalhes do Caso' }}
-          />
+            <Stack.Screen
+              name="UserCaseDetails"
+              component={DetalhesCasoUserScreen} // Aponta para o componente real
+              options={{ title: 'Detalhes do Caso' }}
+            />
 
-          <Stack.Screen
-            name="UserVictimDetails"
-            component={DetalhesVitimaUserScreen}
-            options={{ title: 'Detalhes da Vítima' }}
-          />
+            <Stack.Screen
+              name="UserVictimDetails"
+              component={DetalhesVitimaUserScreen}
+              options={{ title: 'Detalhes da Vítima' }}
+            />
 
-          <Stack.Screen
-            name="UserEditVictim"
-            component={EditarVitimaUserScreen} // Aponta para o componente real
-            options={{ title: 'Editar Dados da Vítima' }}
-          />
+            <Stack.Screen
+              name="UserEditVictim"
+              component={EditarVitimaUserScreen} // Aponta para o componente real
+              options={{ title: 'Editar Dados da Vítima' }}
+            />
 
-          <Stack.Screen
-            name="UserOdontograma"
-            component={OdontogramaUserScreen}
-            options={{ title: 'Registro Odontológico' }}
-          />
+            <Stack.Screen
+              name="UserOdontograma"
+              component={OdontogramaUserScreen}
+              options={{ title: 'Registro Odontológico' }}
+            />
 
-          <Stack.Screen
-            name="UserEditCase"
-            component={EditarCasoUserScreen}
-            options={{ title: 'Editar Caso' }}
-          />
+            <Stack.Screen
+              name="UserEditCase"
+              component={EditarCasoUserScreen}
+              options={{ title: 'Editar Caso' }}
+            />
 
-          <Stack.Screen
-            name="UserCreateVictim"
-            component={CadastrarVitimaUserScreen}
-            options={{ title: 'Adicionar Vítima ao Caso' }}
-          />
+            <Stack.Screen
+              name="UserCreateVictim"
+              component={CadastrarVitimaUserScreen}
+              options={{ title: 'Adicionar Vítima ao Caso' }}
+            />
 
-          <Stack.Screen
-            name="ConsultaCaseDetails"
-            component={DetalhesCasoConsultaScreen}
-            options={{ title: 'Consulta de Caso' }}
-          />
+            <Stack.Screen
+              name="ConsultaCaseDetails"
+              component={DetalhesCasoConsultaScreen}
+              options={{ title: 'Consulta de Caso' }}
+            />
 
-          <Stack.Screen
-            name="ConsultaVictimDetails"
-            component={ConsultaVictimDetailsScreen}
-            options={{ title: 'Consulta de Vítima' }}
-          />
+            <Stack.Screen
+              name="ConsultaVictimDetails"
+              component={ConsultaVictimDetailsScreen}
+              options={{ title: 'Consulta de Vítima' }}
+            />
 
-          <Stack.Screen
-            name="ConsultaOdontograma"
-            component={ConsultaOdontogramaScreen}
-            options={{ title: 'Consulta de Odontograma' }}
-          />
+            <Stack.Screen
+              name="ConsultaOdontograma"
+              component={ConsultaOdontogramaScreen}
+              options={{ title: 'Consulta de Odontograma' }}
+            />
 
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

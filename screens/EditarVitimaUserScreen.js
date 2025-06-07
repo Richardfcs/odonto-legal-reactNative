@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, StyleSheet, Alert, Platform, KeyboardAvoidingView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button, Title, List, Provider as PaperProvider, Divider, ActivityIndicator, Text, Checkbox, Menu, Card } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -139,7 +138,7 @@ const EditarVitimaUserScreen = ({ route }) => {
     return (
         <PaperProvider>
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }} keyboardVerticalOffset={64}>
-                <SafeAreaView style={styles.container}>
+                <View style={styles.container}>
                     <ScrollView>
                         <View style={styles.content}>
                             <Title style={styles.title}>Editar Vítima</Title>
@@ -219,7 +218,7 @@ const EditarVitimaUserScreen = ({ route }) => {
                             </Button>
                         </View>
                     </ScrollView>
-                </SafeAreaView>
+                </View>
             </KeyboardAvoidingView>
         </PaperProvider>
     );
@@ -242,7 +241,7 @@ const styles = StyleSheet.create({
   menuButtonLabel: { textAlign: 'left', color: '#000' },
   checkboxRow: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
   divider: { marginVertical: 16 },
-  button: { marginTop: 8, paddingVertical: 6, borderRadius: 8 },
+  button: { marginTop: 8, paddingVertical: 6, borderRadius: 8, marginBottom: 35 },
   centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 });
 

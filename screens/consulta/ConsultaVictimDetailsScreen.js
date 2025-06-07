@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { ScrollView, View, StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, Card, Title, List, ActivityIndicator, Divider, Provider as PaperProvider, Button as PaperButton } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -61,7 +60,7 @@ const ConsultaVictimDetailsScreen = ({ route }) => {
     
     return (
         <PaperProvider>
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.header}>
                         <Title style={styles.mainTitle}>{victimData.name || victimData.victimCode}</Title>
@@ -103,7 +102,7 @@ const ConsultaVictimDetailsScreen = ({ route }) => {
                         </List.Accordion></Card>
                     </List.AccordionGroup>
                 </ScrollView>
-            </SafeAreaView>
+            </View>
         </PaperProvider>
     );
 };

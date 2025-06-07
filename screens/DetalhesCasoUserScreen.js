@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useLayoutEffect } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, Title, Paragraph, ActivityIndicator, Menu, Appbar, Divider, Provider as PaperProvider, Dialog, Portal, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
@@ -149,7 +148,7 @@ const DetalhesCasoUserScreen = ({ route, navigation }) => {
 
     return (
         <PaperProvider>
-            <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
+            <View style={styles.container} edges={['bottom', 'left', 'right']}>
                 <Card style={styles.headerCard}>
                     <Card.Content>
                         <Title>{caseData.nameCase}</Title>
@@ -176,7 +175,7 @@ const DetalhesCasoUserScreen = ({ route, navigation }) => {
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
-            </SafeAreaView>
+            </View>
         </PaperProvider>
     );
 };

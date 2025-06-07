@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet, Alert, Platform, KeyboardAvoidingView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button, Title, List, Provider as PaperProvider, Divider, Card, Text, Checkbox, Menu } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -144,7 +143,7 @@ const CadastrarVitimaUserScreen = ({ route }) => {
   return (
     <PaperProvider>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }} keyboardVerticalOffset={64}>
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
           <ScrollView>
             <View style={styles.content}>
               <Title style={styles.title}>Cadastro de Vítima</Title>
@@ -221,7 +220,7 @@ const CadastrarVitimaUserScreen = ({ route }) => {
               <Button mode="contained" onPress={handleRegister} loading={loading} disabled={loading} style={styles.button}>Cadastrar Vítima</Button>
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </View>
       </KeyboardAvoidingView>
     </PaperProvider>
   );
@@ -244,7 +243,7 @@ const styles = StyleSheet.create({
   menuButtonLabel: { textAlign: 'left', color: '#000' },
   checkboxRow: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
   divider: { marginVertical: 16 },
-  button: { marginTop: 8, paddingVertical: 6, borderRadius: 8 },
+  button: { marginTop: 8, paddingVertical: 6, borderRadius: 8, marginBottom: 35 },
 });
 
 export default CadastrarVitimaUserScreen;

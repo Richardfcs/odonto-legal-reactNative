@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { ScrollView, View, StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Avatar, Text, Button, Card, Title, List, ActivityIndicator, Divider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -91,7 +90,7 @@ const ProfileScreen = () => {
   const photoUri = userData.photo ? `data:image/png;base64,${userData.photo}` : null;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <View style={styles.content}>
           <View style={styles.header}>
@@ -167,7 +166,7 @@ const ProfileScreen = () => {
           </Card>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

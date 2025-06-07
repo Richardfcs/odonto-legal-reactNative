@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, StyleSheet, Alert, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button, Title, Provider as PaperProvider, Divider, ActivityIndicator } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -85,7 +84,7 @@ const EditarCasoUserScreen = ({ route }) => {
 
     return (
         <PaperProvider>
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.content}>
                         <Title style={styles.title}>Editar Caso</Title>
@@ -104,7 +103,7 @@ const EditarCasoUserScreen = ({ route }) => {
                         </Button>
                     </View>
                 </ScrollView>
-            </SafeAreaView>
+            </View>
         </PaperProvider>
     );
 };
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
     content: { padding: 20 },
     title: { fontSize: 24, fontWeight: 'bold', color: '#1e3a8a', textAlign: 'center', marginBottom: 24 },
-    input: { marginBottom: 16 },
+    input: { marginBottom: 16, marginTop: 16},
     divider: { marginVertical: 16 },
     button: { marginTop: 10, backgroundColor: '#1e40af', paddingVertical: 8 },
 });

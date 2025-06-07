@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Title, List, ActivityIndicator, Divider, Provider as PaperProvider, Text } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -55,7 +54,7 @@ const ConsultaOdontogramaScreen = ({ route }) => {
     
     return (
         <PaperProvider>
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <ScrollView>
                     <Title style={styles.title}>Consulta de Odontograma</Title>
                     <List.Section title="Informações Gerais">
@@ -72,7 +71,7 @@ const ConsultaOdontogramaScreen = ({ route }) => {
                          <List.Item title={odontogramData.summaryForIdentification || "N/A"} description="Sumário para Identificação" left={props => <List.Icon {...props} icon="text-box-search-outline" />} titleNumberOfLines={10} />
                     </List.Section>
                 </ScrollView>
-            </SafeAreaView>
+            </View>
         </PaperProvider>
     );
 };

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, StyleSheet, Alert, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button, Title, List, Provider as PaperProvider, Divider, ActivityIndicator, Text } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -119,7 +118,7 @@ const OdontogramaUserScreen = ({ route }) => {
     
     return (
         <PaperProvider>
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.content}>
                         <Title style={styles.title}>{isEditMode ? 'Editar Odontograma' : 'Novo Odontograma'}</Title>
@@ -160,7 +159,7 @@ const OdontogramaUserScreen = ({ route }) => {
                 </ScrollView>
                 
                 <ToothEditModal visible={isToothModalVisible} onDismiss={() => setIsToothModalVisible(false)} toothData={selectedTooth} onSave={handleSaveTooth} />
-            </SafeAreaView>
+            </View>
         </PaperProvider>
     );
 };

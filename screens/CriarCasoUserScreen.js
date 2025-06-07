@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet, Alert, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button, Title, Provider as PaperProvider, Divider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -82,7 +81,7 @@ const CriarCasoUserScreen = () => {
 
   return (
     <PaperProvider>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ScrollView>
           <View style={styles.content}>
             <Title style={styles.title}>Cadastro de Novo Caso</Title>
@@ -120,7 +119,7 @@ const CriarCasoUserScreen = () => {
             </Button>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </PaperProvider>
   );
 };
@@ -141,6 +140,7 @@ const styles = StyleSheet.create({
     marginBottom: 24 
   },
   input: { 
+    marginTop: 16,
     marginBottom: 16 
   },
   divider: {

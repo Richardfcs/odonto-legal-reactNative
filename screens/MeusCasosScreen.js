@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { FlatList, View, StyleSheet, Alert } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -57,7 +56,7 @@ const MeusCasosScreen = () => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <FlatList
                 data={cases}
                 keyExtractor={(item) => item._id}
@@ -72,7 +71,7 @@ const MeusCasosScreen = () => {
                 }
                 contentContainerStyle={styles.listContent}
             />
-        </SafeAreaView>
+        </View>
     );
 };
 
@@ -88,8 +87,8 @@ const styles = StyleSheet.create({
     },
     listContent: {
         paddingHorizontal: 16,
-        paddingTop: 16,
-        // Garante que o container da lista vazia possa usar flex: 1
+        paddingTop: 16, // Um pouco mais de espaço no topo aqui, já que não há busca
+        paddingBottom: 16,
         flexGrow: 1, 
     },
     emptyContainer: {
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         color: '#64748b',
-        marginBottom: 20, // Adiciona espaço antes do botão de adicionar
+        marginBottom: 20,
     },
 });
 

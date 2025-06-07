@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FlatList, View, StyleSheet, Alert } from 'react-native';
 import { ActivityIndicator, Text, Searchbar, Menu, Button, Provider as PaperProvider } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -81,7 +80,7 @@ const BancoDeCasosScreen = () => {
 
     return (
         <PaperProvider>
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <View style={styles.controlsContainer}>
                     <Searchbar
                         placeholder="Buscar por nome do caso..."
@@ -119,7 +118,7 @@ const BancoDeCasosScreen = () => {
                     onRefresh={() => fetchCases(searchQuery, activeFilter.query)} // Permite "puxar para atualizar"
                     refreshing={loading}
                 />
-            </SafeAreaView>
+            </View>
         </PaperProvider>
     );
 };
@@ -127,7 +126,7 @@ const BancoDeCasosScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: '#f1f5f9', // Cor de fundo de referência
     },
     centered: {
         flex: 1,
@@ -138,24 +137,25 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 8,
-        paddingVertical: 8,
+        paddingVertical: 8, // Padding vertical consistente
         backgroundColor: '#fff',
-        borderBottomWidth: 1,
-        borderBottomColor: '#e2e8f0',
+        // Removido borderBottom, pois o header do navegador já pode ter uma sombra/borda
+    },
+    searchbar: {
+        flex: 1,
+        marginRight: 8, // Espaço entre a busca e o botão de filtro
     },
     listContent: {
         paddingHorizontal: 16,
-        paddingTop: 16,
+        paddingTop: 8, // Reduzido o padding superior
+        paddingBottom: 16, // Espaço na parte inferior para não colar na barra de abas
     },
     emptyContainer: {
         flex: 1,
-        justifyContent: 'center',
+        paddingTop: 100, // Empurra a mensagem para baixo
         alignItems: 'center',
-        marginTop: 50,
-        paddingHorizontal: 20,
     },
     emptyText: {
-        textAlign: 'center',
         fontSize: 16,
         color: '#64748b',
     },

@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, Title, Paragraph, ActivityIndicator, Divider, Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
@@ -41,7 +40,7 @@ const DetalhesCasoConsultaScreen = ({ route }) => {
   
   return (
     <PaperProvider>
-        <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
+        <View style={styles.container} edges={['bottom', 'left', 'right']}>
             <Card style={styles.headerCard}>
                 <Card.Content>
                     <Title>{caseData.nameCase}</Title>
@@ -56,7 +55,7 @@ const DetalhesCasoConsultaScreen = ({ route }) => {
 
             {/* Renderiza o navegador de abas de consulta */}
             <CasoConsultaTabNavigator caseId={caseId} />
-        </SafeAreaView>
+        </View>
     </PaperProvider>
   );
 };

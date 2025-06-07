@@ -15,8 +15,17 @@ const UserTabNavigator = () => {
         <Tab.Navigator
             initialRouteName="MeusCasos"
             screenOptions={{
-                tabBarActiveTintColor: '#1e40af',
-                headerShown: true, // Vamos mostrar o header padrão
+                // APLICAÇÃO DOS NOVOS ESTILOS
+                headerStyle: {
+                    backgroundColor: '#0f172a', // Cor de fundo escura, como no seu CSS de referência
+                },
+                headerTintColor: '#fff', // Cor do texto e ícones do header (branco)
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+                tabBarActiveTintColor: '#1e40af', // Cor da aba ativa (azul forte)
+                tabBarInactiveTintColor: 'gray',
+                headerShown: true,
             }}
         >
             <Tab.Screen
