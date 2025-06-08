@@ -18,6 +18,7 @@ const ProfileButton = () => {
     return (
         <Appbar.Action
           icon="account-circle"
+          color="white" 
           onPress={() => navigation.navigate('AdminProfile')}
         />
     );
@@ -25,9 +26,26 @@ const ProfileButton = () => {
 
 const AdminTabNavigator = () => {
   return (
+    // <Stack.Group screenOptions={{
+    //         headerStyle: {
+    //           backgroundColor: '#0f172a', // Cor escura
+    //         },
+    //         headerTintColor: '#fff', // Cor do texto e ícone de voltar
+    //         headerTitleStyle: {
+    //           fontWeight: 'bold',
+    //         },
+    //       }}>
+    
     <Tab.Navigator
       initialRouteName="Cases" // A aba inicial será "Gerenciar Casos"
       screenOptions={{
+        headerStyle: {
+               backgroundColor: '#0f172a', // Cor escura
+             },
+             headerTintColor: '#fff', // Cor do texto e ícone de voltar
+             headerTitleStyle: {
+               fontWeight: 'bold',
+             },
         tabBarActiveTintColor: '#007bff', // Cor do ícone e texto da aba ativa
         tabBarInactiveTintColor: 'gray',   // Cor do ícone e texto da aba inativa
         // Definindo um header padrão para todas as abas, com o botão de perfil

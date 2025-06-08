@@ -65,7 +65,7 @@ const DetalhesCasoScreen = ({ route, navigation }) => {
           <Menu
             visible={menuVisible}
             onDismiss={() => setMenuVisible(false)}
-            anchor={<Appbar.Action icon="dots-vertical" color="black" onPress={() => setMenuVisible(true)} />}
+            anchor={<Appbar.Action icon="dots-vertical" color="white" onPress={() => setMenuVisible(true)} />}
           >
             <Menu.Item
               onPress={() => {

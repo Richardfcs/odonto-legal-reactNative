@@ -22,6 +22,7 @@ const AdminHomeScreen = () => {
       headerRight: () => (
         <Appbar.Action
           icon="account-circle"
+          color="white"
           onPress={() => navigation.navigate('AdminProfile')}
         />
       ),

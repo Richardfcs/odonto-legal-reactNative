@@ -43,87 +43,15 @@ export default function App() {
         <Stack.Navigator
           initialRouteName="Login"
         >
-          {/* Telas que não têm o layout de abas */}
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
 
-          {/* Rota para o conjunto de telas do Admin (o Tab Navigator) */}
-          <Stack.Screen
-            name="AdminTabs"
-            component={AdminTabNavigator}
-            options={{ headerShown: false }}
-          />
+            {/* Telas que não têm o layout de abas */}
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
 
-          {/* ================================================================== */}
-          {/* Telas que serão abertas POR CIMA do fluxo de abas do Admin        */}
-          {/* ================================================================== */}
-
-          <Stack.Screen
-            name="AdminProfile"
-            component={ProfileScreen}
-            options={{ title: 'Meu Perfil' }}
-          />
-
-          {/* ROTA ATUALIZADA */}
-          <Stack.Screen
-            name="AdminManagePermissions"
-            component={GerenciarPermissoesScreen} // Agora aponta para o componente real
-            options={{ title: 'Gerenciar Funcionário' }} // Título do header da tela
-          />
-
-          <Stack.Screen
-            name="AdminCreateFuncionario"
-            component={CadastrarFuncionarioScreen}
-            options={{ title: 'Cadastrar Funcionário' }}
-          />
-
-          {/* Rotas de Casos (ainda como placeholder) */}
-          <Stack.Screen
-            name="AdminCaseDetails"
-            component={DetalhesCasoScreen}
-            options={{ title: 'Detalhes do Caso' }} // O título do header
-          />
-
-          <Stack.Screen
-            name="AdminCreateCase"
-            component={CriarCasoScreen}
-            options={{ title: 'Criar Novo Caso' }}
-          />
-
-          <Stack.Screen
-            name="AdminCreateVictim"
-            component={CadastrarVitimaScreen}
-            options={{ title: 'Adicionar Vítima ao Caso' }}
-          />
-
-          <Stack.Screen
-            name="AdminVictimDetails"
-            component={DetalhesVitimaScreen} // Agora aponta para o componente real
-            options={{ title: 'Detalhes da Vítima' }}
-          />
-
-          {/* ADICIONANDO A NOVA ROTA DE EDIÇÃO DE VÍTIMA */}
-          <Stack.Screen
-            name="AdminEditVictim"
-            component={EditarVitimaScreen}
-            options={{ title: 'Editar Dados da Vítima' }}
-          />
-
-          <Stack.Screen
-            name="AdminOdontograma"
-            component={OdontogramaScreen}
-            options={{ title: 'Registro Odontológico' }}
-          />
-
-          <Stack.Screen
-            name="AdminEditCase"
-            component={EditarCasoScreen}
-            options={{ title: 'Editar Dados do Caso' }}
-          />
-          <Stack.Group screenOptions={{
+            <Stack.Group screenOptions={{
             headerStyle: {
               backgroundColor: '#0f172a', // Cor escura
             },
@@ -132,6 +60,81 @@ export default function App() {
               fontWeight: 'bold',
             },
           }}>
+
+            {/* Rota para o conjunto de telas do Admin (o Tab Navigator) */}
+            <Stack.Screen
+              name="AdminTabs"
+              component={AdminTabNavigator}
+              options={{ headerShown: false }}
+            />
+
+            {/* ================================================================== */}
+            {/* Telas que serão abertas POR CIMA do fluxo de abas do Admin        */}
+            {/* ================================================================== */}
+
+            <Stack.Screen
+              name="AdminProfile"
+              component={ProfileScreen}
+              options={{ title: 'Meu Perfil' }}
+            />
+
+            {/* ROTA ATUALIZADA */}
+            <Stack.Screen
+              name="AdminManagePermissions"
+              component={GerenciarPermissoesScreen} // Agora aponta para o componente real
+              options={{ title: 'Gerenciar Funcionário' }} // Título do header da tela
+            />
+
+            <Stack.Screen
+              name="AdminCreateFuncionario"
+              component={CadastrarFuncionarioScreen}
+              options={{ title: 'Cadastrar Funcionário' }}
+            />
+
+            {/* Rotas de Casos (ainda como placeholder) */}
+            <Stack.Screen
+              name="AdminCaseDetails"
+              component={DetalhesCasoScreen}
+              options={{ title: 'Detalhes do Caso' }} // O título do header
+            />
+
+            <Stack.Screen
+              name="AdminCreateCase"
+              component={CriarCasoScreen}
+              options={{ title: 'Criar Novo Caso' }}
+            />
+
+            <Stack.Screen
+              name="AdminCreateVictim"
+              component={CadastrarVitimaScreen}
+              options={{ title: 'Adicionar Vítima ao Caso' }}
+            />
+
+            <Stack.Screen
+              name="AdminVictimDetails"
+              component={DetalhesVitimaScreen} // Agora aponta para o componente real
+              options={{ title: 'Detalhes da Vítima' }}
+            />
+
+            {/* ADICIONANDO A NOVA ROTA DE EDIÇÃO DE VÍTIMA */}
+            <Stack.Screen
+              name="AdminEditVictim"
+              component={EditarVitimaScreen}
+              options={{ title: 'Editar Dados da Vítima' }}
+            />
+
+            <Stack.Screen
+              name="AdminOdontograma"
+              component={OdontogramaScreen}
+              options={{ title: 'Registro Odontológico' }}
+            />
+
+            <Stack.Screen
+              name="AdminEditCase"
+              component={EditarCasoScreen}
+              options={{ title: 'Editar Dados do Caso' }}
+            />
+
 
             <Stack.Screen
               name="UserTabs"

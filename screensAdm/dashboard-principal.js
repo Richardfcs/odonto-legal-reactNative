@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { SegmentedButtons } from 'react-native-paper';
 
 // Importe os componentes de dashboard
@@ -38,7 +37,7 @@ const DashboardScreen = () => {
 
   return (
     // SafeAreaView garante que nada fique atrás de notches ou da barra de status
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <View style={styles.container} edges={['top', 'left', 'right']}>
         {/* Este View é o cabeçalho com os botões segmentados */}
         <View style={styles.headerContainer}>
             <ScrollView 
@@ -71,7 +70,7 @@ const DashboardScreen = () => {
         <ScrollView contentContainerStyle={styles.dashboardContent}>
             {renderDashboard()}
         </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
